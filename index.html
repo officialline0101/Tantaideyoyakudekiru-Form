@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>カレンダー予約</title>
+  <title>イベント予約フォーム</title>
 </head>
 <body>
   <h1>イベント予約</h1>
@@ -12,7 +12,6 @@
     <label>終了日時: <input type="datetime-local" id="end" required></label><br>
     <button type="submit">送信</button>
   </form>
-
   <div id="result"></div>
 
   <script>
@@ -28,7 +27,7 @@
         end: document.getElementById('end').value
       };
 
-      fetch('https://script.google.com/macros/s/AKfycbwg1ZeZhpRVVVte2DQ4FVvp3p3lFxLCKAHP_eM7AqFZqTI92fkmzOGxc0YnaNLKW5-G/exec', { // ここをあなたのGAS WebアプリURLに置き換える
+      fetch('https://script.google.com/macros/s/AKfycbw0q2s_etlrZzIULzy1L8Epd2Joi4p0IvsqoR7G6R1ReDf5o8T_7Io7suhVWyca8krt/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -36,13 +35,13 @@
       .then(res => res.json())
       .then(res => {
         if (res.status === 'success') {
-          result.textContent = 'イベント作成に成功しました！';
+          result.textContent = 'イベントが正常に作成されました。';
         } else {
-          result.textContent = 'エラー：' + res.message;
+          result.textContent = 'エラー: ' + res.message;
         }
       })
       .catch(err => {
-        result.textContent = '通信エラー：' + err.message;
+        result.textContent = '通信エラー: ' + err.message;
       });
     });
   </script>
